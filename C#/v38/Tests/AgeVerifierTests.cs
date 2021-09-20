@@ -1,14 +1,14 @@
 using System;
+using Logic;
 using Xunit;
 
 namespace Tests
 {
-    public class UnitTest1
+    public class AgeVerifierTests
     {
         [Fact]
-        public void Test1()
+        public void Test_ComingOfAge()
         {
-
         }
     }
 }
