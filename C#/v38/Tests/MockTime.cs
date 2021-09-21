@@ -9,14 +9,21 @@ namespace Tests
 {
     class MockTime : ITime
     {
+        private DateTime _fakeNow;
+
+        public MockTime()
+        {
+            _fakeNow = DateTime.Now;
+        }
+
         public DateTime Now()
         {
-            throw new NotImplementedException();
+            return _fakeNow;
         }
 
         public void SetNowTo(DateTime newNow)
         {
-            throw new NotImplementedException();
+            _fakeNow = newNow;
         }
     }
 }

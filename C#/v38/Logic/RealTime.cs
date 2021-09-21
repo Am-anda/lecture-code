@@ -10,7 +10,7 @@ namespace Logic
     {
         public DateTime Now()
         {
-            throw new NotImplementedException();
+            return DateTime.Now;
         }
     }
 }

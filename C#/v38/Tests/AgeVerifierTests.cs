@@ -43,6 +43,7 @@ namespace Tests
         public void Test_ComingOfAge()
         {
             var mockTime = new MockTime();
+
             var verfier = new AgeVerifier(18, mockTime);
             var person = new Person()
             {
@@ -58,6 +59,22 @@ namespace Tests
 
             oldEnough = verfier.Try(person);
             Assert.True(oldEnough);
+        }
+
+        [Fact]
+        public void Test_RealTime()
+        {
+            var realTime = new RealTime();
+
+            Assert.InRange(realTime.Now(), 
+                DateTime.Now - TimeSpan.FromMilliseconds(1),
+                DateTime.Now + TimeSpan.FromMilliseconds(1));
+
+            Thread.Sleep(1000);
+
+            Assert.InRange(realTime.Now(),
+                DateTime.Now - TimeSpan.FromMilliseconds(1),
+                DateTime.Now + TimeSpan.FromMilliseconds(1));
         }
     }
 }
