@@ -47,7 +47,7 @@ interface IPayer
 * Istället för metodkroppar (`{}`) används `;`
 * Används genom att sätta den på en klass
   ```csharp
-    class DebitCard : IPay
+    class DebitCard : IPayer
     {
         public bool TryMakePayment(int amount)
         {
