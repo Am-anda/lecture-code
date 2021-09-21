@@ -34,7 +34,49 @@ namespace Tests
             paymentMade = card.TryMakePayment(600);
             Assert.False(paymentMade);
         }
+
+        [Fact]
+        void Test_CardWallet()
+        {
+            var wallet = new Wallet(
+                new DebitCard(1000), 
+                new CreditCard(1000, 500));
+
+            for (int times = 0; times < 3; times++)
+            {
+                var paymentMade = wallet.TryMakePayment(600);
+                Assert.True(paymentMade);
+            }
+
+            var lastPayment = wallet.TryMakePayment(600);
+            Assert.False(lastPayment);
+        }
     }
+    class Wallet : IPayer
+    {
+        private IPayer[] _cards;
+        public Wallet(params IPayer[] cards)
+        {
+            _cards = cards;
+        }
+        public bool TryMakePayment(int amount)
+        {
+            bool couldPay = false;
+
+            foreach (var card in _cards)
+            {
+                bool paymentAttempt = card.TryMakePayment(amount);
+                if (paymentAttempt)
+                {
+                    couldPay = true;
+                    break;
+                }
+            }
+
+            return couldPay;
+        }
+    }
+
     interface IPayer
     {
         public bool TryMakePayment(int amount);
