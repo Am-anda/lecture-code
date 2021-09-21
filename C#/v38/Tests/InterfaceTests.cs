@@ -20,12 +20,26 @@ namespace Tests
             paymentMade = card.TryMakePayment(600);
             Assert.False(paymentMade);
         }
-    }
+        [Fact]
+        void Test_CreditCard()
+        {
+            var card = new CreditCard(1000, 500);
 
+            var paymentMade = card.TryMakePayment(600);
+            Assert.True(paymentMade);
+
+            paymentMade = card.TryMakePayment(600);
+            Assert.True(paymentMade);
+
+            paymentMade = card.TryMakePayment(600);
+            Assert.False(paymentMade);
+        }
+    }
     interface IPayer
     {
         public bool TryMakePayment(int amount);
     }
+
     class DebitCard : IPayer
     {
         private int _balance;
@@ -40,6 +54,39 @@ namespace Tests
             if (canPay)
             {
                 _balance -= amount;
+            }
+
+            return canPay;
+        }
+    }
+
+    class CreditCard : IPayer
+    {
+        private int _balance;
+        private int _credit;
+        public CreditCard(int balance, int credit)
+        {
+            _balance = balance;
+            _credit = credit;
+        }
+
+        public bool TryMakePayment(int amount)
+        {
+            bool canPay = amount <= (_balance + _credit);
+
+            if (canPay)
+            {
+                if (_balance < amount)
+                {
+                    amount -= _balance;
+                    _balance = 0;
+
+                    _credit -= amount;
+                }
+                else
+                {
+                    _balance -= amount;
+                }
             }
 
             return canPay;
