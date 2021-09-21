@@ -10,7 +10,8 @@ namespace Tests
         [Fact]
         public void Test_MinorNotAllowed()
         {
-            var verfier = new AgeVerifier(18);
+            var mockTime = new MockTime();
+            var verfier = new AgeVerifier(18, mockTime);
             var person = new Person() 
                 {
                     Name = "Sandra", 
@@ -25,7 +26,8 @@ namespace Tests
         [Fact]
         public void Test_AdultAllowed()
         {
-            var verfier = new AgeVerifier(18);
+            var mockTime = new MockTime();
+            var verfier = new AgeVerifier(18, mockTime);
             var person = new Person()
             {
                 Name = "Sandra",
@@ -40,7 +42,8 @@ namespace Tests
         [Fact]
         public void Test_ComingOfAge()
         {
-            var verfier = new AgeVerifier(18);
+            var mockTime = new MockTime();
+            var verfier = new AgeVerifier(18, mockTime);
             var person = new Person()
             {
                 Name = "Sandra",
@@ -51,6 +54,7 @@ namespace Tests
             Assert.False(oldEnough);
 
             // det går ett år
+            mockTime.SetNowTo(DateTime.Now + TimeSpan.FromDays(365 * 1));
 
             oldEnough = verfier.Try(person);
             Assert.True(oldEnough);

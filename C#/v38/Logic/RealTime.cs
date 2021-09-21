@@ -3,18 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Logic;
 
-namespace Tests
+namespace Logic
 {
-    class MockTime : ITime
+    public class RealTime : ITime
     {
         public DateTime Now()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SetNowTo(DateTime newNow)
         {
             throw new NotImplementedException();
         }
