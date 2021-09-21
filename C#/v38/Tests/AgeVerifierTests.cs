@@ -66,13 +66,13 @@ namespace Tests
         {
             var realTime = new RealTime();
 
-            Assert.InRange(realTime.Now(), 
+            Assert.InRange(realTime.Now, 
                 DateTime.Now - TimeSpan.FromMilliseconds(1),
                 DateTime.Now + TimeSpan.FromMilliseconds(1));
 
             Thread.Sleep(1000);
 
-            Assert.InRange(realTime.Now(),
+            Assert.InRange(realTime.Now,
                 DateTime.Now - TimeSpan.FromMilliseconds(1),
                 DateTime.Now + TimeSpan.FromMilliseconds(1));
         }

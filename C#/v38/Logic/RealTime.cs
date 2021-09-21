@@ -8,9 +8,12 @@ namespace Logic
 {
     public class RealTime : ITime
     {
-        public DateTime Now()
+        public DateTime Now
         {
-            return DateTime.Now;
+            get
+            {
+                return DateTime.Now;
+            }
         }
     }
 }

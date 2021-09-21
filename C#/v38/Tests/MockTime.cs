@@ -16,9 +16,12 @@ namespace Tests
             _fakeNow = DateTime.Now;
         }
 
-        public DateTime Now()
+        public DateTime Now
         {
-            return _fakeNow;
+            get
+            {
+                return _fakeNow;
+            }
         }
 
         public void SetNowTo(DateTime newNow)

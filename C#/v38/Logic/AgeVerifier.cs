@@ -15,7 +15,7 @@ namespace Logic
 
         public bool Try(Person person)
         {
-            var age = _time.Now() - person.BirthDate;
+            var age = _time.Now - person.BirthDate;
 
             var yearsOld = age.Days / 365;
             var ofAge = yearsOld >= _ageLimit;

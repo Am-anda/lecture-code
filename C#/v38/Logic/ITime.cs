@@ -8,6 +8,6 @@ namespace Logic
 {
     public interface ITime
     {
-        public DateTime Now();
+        public DateTime Now { get; }
     }
 }

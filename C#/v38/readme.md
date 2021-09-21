@@ -96,6 +96,8 @@ När koden väl används i produktionskod senare
 så är det bara att skicka med `RealTime`
 till konstruktorn istället för `MockTime`
 
+![Skärmbild 2021 09 21 165712](img/bild1.png)
+
 ---
 #### 🍔 Lunch break 🍔
 ---
