@@ -10,14 +10,14 @@ namespace Tests
         [Fact]
         public void Test_MinorNotAllowed()
         {
-            AgeVerifier verfier = new AgeVerifier(18);
-            Person person = new Person() 
+            var verfier = new AgeVerifier(18);
+            var person = new Person() 
                 {
                     Name = "Sandra", 
                     BirthDate = DateTime.Today
                 };
 
-            bool oldEnough = verfier.Try(person, DateTime.Now);
+            var oldEnough = verfier.Try(person, DateTime.Now);
 
             Assert.False(oldEnough);
         }
@@ -25,14 +25,14 @@ namespace Tests
         [Fact]
         public void Test_AdultAllowed()
         {
-            AgeVerifier verfier = new AgeVerifier(18);
-            Person person = new Person()
+            var verfier = new AgeVerifier(18);
+            var person = new Person()
             {
                 Name = "Sandra",
                 BirthDate = DateTime.Today - TimeSpan.FromDays(365 * 19)
             };
 
-            bool oldEnough = verfier.Try(person, DateTime.Now);
+            var oldEnough = verfier.Try(person, DateTime.Now);
 
             Assert.True(oldEnough);
         }
@@ -40,16 +40,16 @@ namespace Tests
         [Fact]
         public void Test_ComingOfAge()
         {
-            AgeVerifier verfier = new AgeVerifier(18);
-            Person person = new Person()
+            var verfier = new AgeVerifier(18);
+            var person = new Person()
             {
                 Name = "Sandra",
                 BirthDate = DateTime.Today - TimeSpan.FromDays(365 * 17)
             };
 
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
 
-            bool oldEnough = verfier.Try(person, now);
+            var oldEnough = verfier.Try(person, now);
             Assert.False(oldEnough);
 
             // det går ett år

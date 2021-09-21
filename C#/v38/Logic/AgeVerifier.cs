@@ -13,10 +13,10 @@ namespace Logic
 
         public bool Try(Person person, DateTime now)
         {
-            TimeSpan age = now - person.BirthDate;
+            var age = now - person.BirthDate;
 
-            int yearsOld = age.Days / 365;
-            bool ofAge = yearsOld >= _ageLimit;
+            var yearsOld = age.Days / 365;
+            var ofAge = yearsOld >= _ageLimit;
 
             return ofAge;
         }
