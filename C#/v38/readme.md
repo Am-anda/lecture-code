@@ -18,8 +18,10 @@ inte lika självklart att ens tester är enhetstester.
 - [Att bygga en almenacka](#att-bygga-en-almenacka)
 - [Kontrollera slump](#kontrollera-slump)
 
+## Var ska vi använda `var`?
+
 ## En klass som kollar ålder
-Använd `AgeVerifier` och `Person` och skriv i `Tests.cs`
+Använd `AgeVerifier` och `Person` och skriv i `AgeVerifierTests.cs`
 ### Kata
 1. Skriv ett test som kollar att någon 
     som är för ung inte blir godkänd
