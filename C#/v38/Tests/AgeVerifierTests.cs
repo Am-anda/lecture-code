@@ -17,7 +17,7 @@ namespace Tests
                     BirthDate = DateTime.Today
                 };
 
-            var oldEnough = verfier.Try(person, DateTime.Now);
+            var oldEnough = verfier.Try(person);
 
             Assert.False(oldEnough);
         }
@@ -32,7 +32,7 @@ namespace Tests
                 BirthDate = DateTime.Today - TimeSpan.FromDays(365 * 19)
             };
 
-            var oldEnough = verfier.Try(person, DateTime.Now);
+            var oldEnough = verfier.Try(person);
 
             Assert.True(oldEnough);
         }
@@ -47,15 +47,12 @@ namespace Tests
                 BirthDate = DateTime.Today - TimeSpan.FromDays(365 * 17)
             };
 
-            var now = DateTime.Now;
-
-            var oldEnough = verfier.Try(person, now);
+            var oldEnough = verfier.Try(person);
             Assert.False(oldEnough);
 
             // det går ett år
-            now += TimeSpan.FromDays(365 * 1);
 
-            oldEnough = verfier.Try(person, now);
+            oldEnough = verfier.Try(person);
             Assert.True(oldEnough);
         }
     }
