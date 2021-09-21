@@ -58,12 +58,12 @@ interface IPayer
 
 ### Kata
 
-1. Skriv en klass som använder `IPay` och simulerar
+1. Skriv en klass som använder `IPayer` och simulerar
     ett debit kort
-2. Skriv en klass som använder `IPay` och simulerar
+2. Skriv en klass som använder `IPayer` och simulerar
     ett kreditkort
-2. Skriv en klass som använder `IPay` och simulerar
-    ett en plånbok med flera olika kort i (`List<IPay>`)
+2. Skriv en klass som använder `IPayer` och simulerar
+    ett en plånbok med flera olika kort i (`List<IPayer>`)
 
 ## Tillbaka till åldrar
 
