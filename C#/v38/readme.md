@@ -127,6 +127,9 @@ har en `public List<Appointment> Load()` och en
 2. Testa att skriva till en textfil(p5). Öppna och kontrollera med notepad.exe sen
 3. Testa att läsa in text från en textfil(p4). Kolla med printdebugging eller stepthrough debugging
 
+### Filer lärdomar
+- Varje fil har en path, hur man hittar till filen
+- Om ett program har öppnat en fil så kan inte ett annat program ändra på filen
 
 ### Kata
 1. Skapa ett test med en `Schedule` klass som har
