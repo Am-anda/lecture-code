@@ -15,11 +15,32 @@ namespace Tests
         {
             var scheduler = new Scheduler();
 
-            scheduler.AddAppointment("buy milk", DateTime.Today + TimeSpan.FromDays(1));
+            scheduler.AddAppointment("buy milk", 
+                DateTime.Today + TimeSpan.FromDays(1));
 
             var active = scheduler.GetActiveAppointments();
 
-            Assert.Equal("get milk", active[0].What);
+            Assert.Equal("buy milk", active[0].What);
+        }
+
+        [Fact]
+        void Test_BothActiveAndFinishedAppointmentsExists()
+        {
+            var scheduler = new Scheduler();
+
+            scheduler.AddAppointment("buy eggs", 
+                DateTime.Today - TimeSpan.FromDays(1));
+            scheduler.AddAppointment("buy milk",
+                DateTime.Today + TimeSpan.FromDays(1));
+
+            var active = scheduler.GetActiveAppointments();
+            var finished = scheduler.GetFinishedAppointments();
+
+            Assert.Equal(1, active.Count);
+            Assert.Equal(1, finished.Count);
+
+            Assert.Equal("buy milk", active[0].What);
+            Assert.Equal("buy eggs", finished[0].What);
         }
     }
 }

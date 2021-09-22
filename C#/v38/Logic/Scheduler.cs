@@ -19,13 +19,38 @@ namespace Logic
         {
             _appointments.Add(new Appointment()
             {
-                What = what
+                What = what,
+                When = when
             });
         }
 
         public List<Appointment> GetActiveAppointments()
         {
-            return _appointments;
+            var active = new List<Appointment>();
+
+            foreach (var appointment in _appointments)
+            {
+                if (appointment.When > DateTime.Now)
+                {
+                    active.Add(appointment);
+                }
+            }
+
+            return active;
+        }
+        public List<Appointment> GetFinishedAppointments()
+        {
+            var finished = new List<Appointment>();
+
+            foreach (var appointment in _appointments)
+            {
+                if (appointment.When <= DateTime.Now)
+                {
+                    finished.Add(appointment);
+                }
+            }
+
+            return finished;
         }
     }
 }

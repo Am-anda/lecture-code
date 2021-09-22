@@ -9,5 +9,6 @@ namespace Logic
     public class Appointment
     {
         public string What;
+        public DateTime When;
     }
 }
