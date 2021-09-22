@@ -84,7 +84,7 @@ vi använda en interface som tillåter två lösningar.
 1. Skapa en `ITime` interface som har en property
     eller en metod som returnerar en `DateTime`
 2. Skapa en `MockTime` klass som har en extra
-   metod där vi kan ändra vad som är "nu" (``public void SetNowTo(DateTime date)`)
+   metod där vi kan ändra vad som är "nu" (`public void SetNowTo(DateTime date)`)
 3. Skicka med `MockTime` testet till lösningen
     testa att personen först är för ung, sen vrid
     fram klockan ett år och se att personen nu
@@ -99,7 +99,7 @@ till konstruktorn istället för `MockTime`
 ![Skärmbild 2021 09 21 165712](img/bild1.png)
 
 ---
-#### 🍔 Lunch break 🍔
+#### 🍔 Lektions break 🍔
 ---
 
 ## Att bygga en almenacka
@@ -111,18 +111,26 @@ ner och hämta data. Låt säga att denna `IStore`
 har en `public List<Appointment> Load()` och en
 `public Save(List<Appointment> todos)`.
 
+### Verktyg för att jobba med filer
+- `Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)` för att få tag på vanliga foldrar
+- `Path.Combine()` för att bygga nya filsystems adresser
+- `File.Exists()` för att kolla om en fil redan finns
+- `StreamReader` för att läsa av en fil
+- `StreamWriter` för att skriva till en fil
+
 ### Kata
 1. Skapa ett test med en `Schedule` klass som har
     en metod `AddAppointment(string what, DateTime when)`
 2. Skapa ett test där man kan få tag på två listor
     `List<Appointment> GetActiveAppointments()` och
     `List<Appointment> GetFinishedAppointments()`
-3. Skapa ett test som använder en `InMemoryStore` (`IStore`) 
-    som bara sparar listan i ett fält vid `Save` och sen lämnar
-    tillbaka den vid `Load`.
-    I act steget så skapas `Schedule`, fylls och sen skrivs över med en ny
+3. Skapa ett test där I act steget så skapas `Schedule`, 
+    fylls och sen skrivs över med en ny
     `Schedule` men denna gången ska det nya `Schedule` 
-    objektet innehålla samma schematider som tidigare
+    objektet innehålla samma schematider som tidigare.
+    Använd en `InMemoryStore` (`IStore`) 
+    som bara sparar listan i ett fält vid `Save` och sen lämnar
+    tillbaka den vid `Load`, för att 
 3. Skapa en `FileStore` klass som kan spara ner
     en `List<Appointment>` till given plats (via konstruktor).
     Asserta filen och dess innehåll. Ladda sen filen
