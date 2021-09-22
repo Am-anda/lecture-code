@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    interface IStore
+    public interface IStore
     {
         public List<Appointment> Load();
         public void Save(List<Appointment> appointments);
