@@ -50,8 +50,8 @@ namespace Tests
 
             scheduler.AddAppointment("buy milk",
                 DateTime.Today + TimeSpan.FromDays(1));
-
-            // starta om scheduler
+            
+            // Här kallas det gamla Scheduler objektets Dispose()
             scheduler = new Scheduler();
 
             var active = scheduler.GetActiveAppointments();

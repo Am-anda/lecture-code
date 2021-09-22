@@ -6,13 +6,19 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class Scheduler
+    public class Scheduler : IDisposable
     {
         private List<Appointment> _appointments;
 
         public Scheduler()
         {
             _appointments = new List<Appointment>();
+            // Här vill vi ladda in våra bokade datum sen innan
+        }
+
+        public void Dispose()
+        {
+            // Här vill vi spara ner våra bokade datum
         }
 
         public void AddAppointment(string what, DateTime when)
