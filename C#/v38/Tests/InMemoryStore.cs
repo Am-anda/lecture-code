@@ -9,14 +9,18 @@ namespace Tests
 {
     class InMemoryStore : IStore
     {
+        private List<Appointment> _appointments;
+
         public List<Appointment> Load()
         {
-            throw new NotImplementedException();
+            if (_appointments == null)
+                _appointments = new List<Appointment>();
+            return _appointments;
         }
 
         public void Save(List<Appointment> appointments)
         {
-            throw new NotImplementedException();
+            _appointments = appointments;
         }
     }
 }

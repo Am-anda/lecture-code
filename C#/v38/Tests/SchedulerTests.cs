@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,8 @@ namespace Tests
         [Fact]
         void Test_CanAddAppointment()
         {
-            var scheduler = new Scheduler();
+            var store = new InMemoryStore();
+            var scheduler = new Scheduler(store);
 
             scheduler.AddAppointment("buy milk", 
                 DateTime.Today + TimeSpan.FromDays(1));
@@ -26,7 +28,8 @@ namespace Tests
         [Fact]
         void Test_BothActiveAndFinishedAppointmentsExists()
         {
-            var scheduler = new Scheduler();
+            var store = new InMemoryStore();
+            var scheduler = new Scheduler(store);
 
             scheduler.AddAppointment("buy eggs", 
                 DateTime.Today - TimeSpan.FromDays(1));
@@ -46,18 +49,58 @@ namespace Tests
         [Fact]
         void Test_AppointmentsAreSaved()
         {
-            var scheduler = new Scheduler();
+            var store = new InMemoryStore();
 
-            scheduler.AddAppointment("buy milk",
-                DateTime.Today + TimeSpan.FromDays(1));
+            using (var scheduler = new Scheduler(store))
+            {
+                scheduler.AddAppointment("buy milk",
+                    DateTime.Today + TimeSpan.FromDays(1));
+            }
             
-            // Här kallas det gamla Scheduler objektets Dispose()
-            scheduler = new Scheduler();
+            using (var scheduler = new Scheduler(store))
+            {
+                var active = scheduler.GetActiveAppointments();
 
-            var active = scheduler.GetActiveAppointments();
+                Assert.Equal(1, active.Count);
+                Assert.Equal("buy milk", active[0].What);
+            }
+        }
 
-            Assert.Equal(1, active.Count);
-            Assert.Equal("buy milk", active[0].What);
+        [Fact]
+        void Test_FileStore()
+        {
+            // bestäm vägen till filen
+            var path = Environment.GetFolderPath(
+                Environment.SpecialFolder.UserProfile);
+            path = Path.Combine(path, "appointments.txt");
+
+            // förbered vad som ska testas
+            var store = new FileStore(path);
+            var when = DateTime.Today + TimeSpan.FromDays(1);
+
+            // testa att spara ner
+            var appointmentsToSave = new List<Appointment>();
+            appointmentsToSave.Add(new Appointment()
+            {
+                What = "buy milk",
+                When = when
+            });
+            store.Save(appointmentsToSave);
+
+            // dubbelkolla filen
+            Assert.True(File.Exists(path));
+            using (var sr = new StreamReader(path))
+            {
+                var firstRow = sr.ReadLine();
+                Assert.Equal("buy milk\t2021-09-23 00:00:00", firstRow);
+            }
+            
+            // testa att ladda in
+            var loadedAppointments = store.Load();
+
+            // dubbelkolla vad vi fick tillbaka
+            Assert.Equal("buy milk", loadedAppointments[0].What);
+            Assert.Equal(when, loadedAppointments[0].When);
         }
     }
 }

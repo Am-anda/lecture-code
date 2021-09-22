@@ -9,16 +9,17 @@ namespace Logic
     public class Scheduler : IDisposable
     {
         private List<Appointment> _appointments;
+        private readonly IStore _store;
 
-        public Scheduler()
+        public Scheduler(IStore store)
         {
-            _appointments = new List<Appointment>();
-            // Här vill vi ladda in våra bokade datum sen innan
+            _appointments = store.Load();
+            _store = store;
         }
 
         public void Dispose()
         {
-            // Här vill vi spara ner våra bokade datum
+            _store.Save(_appointments);
         }
 
         public void AddAppointment(string what, DateTime when)
