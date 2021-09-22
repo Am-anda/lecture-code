@@ -74,6 +74,11 @@ namespace Tests
                 Environment.SpecialFolder.UserProfile);
             path = Path.Combine(path, "appointments.txt");
 
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+
             // förbered vad som ska testas
             var store = new FileStore(path);
             var when = DateTime.Today + TimeSpan.FromDays(1);
@@ -92,7 +97,7 @@ namespace Tests
             using (var sr = new StreamReader(path))
             {
                 var firstRow = sr.ReadLine();
-                Assert.Equal("buy milk\t2021-09-23 00:00:00", firstRow);
+                Assert.Equal("buy milk," + when, firstRow);
             }
             
             // testa att ladda in
