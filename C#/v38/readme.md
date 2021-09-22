@@ -112,11 +112,21 @@ har en `public List<Appointment> Load()` och en
 `public Save(List<Appointment> todos)`.
 
 ### Verktyg för att jobba med filer
-- `Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)` för att få tag på vanliga foldrar
-- `Path.Combine()` för att bygga nya filsystems adresser
-- `File.Exists()` för att kolla om en fil redan finns
-- `StreamReader` för att läsa av en fil
-- `StreamWriter` för att skriva till en fil
+1. `Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)` för att få tag på vanliga foldrar
+2. `Path.Combine()` för att bygga nya filsystems adresser
+3. `File.Exists()` för att kolla om en fil redan finns
+4. `StreamReader` för att läsa av en fil
+5. `StreamWriter` för att skriva till en fil
+
+### Spike
+    En spike är när man skriver lite
+    snabb exprimentell kod för att ta reda på
+    hur något fungerar
+
+1. Testa att kolla om en fil finns eller ej i din hemfolder (p1-p3)
+2. Testa att skriva till en textfil(p5). Öppna och kontrollera med notepad.exe sen
+3. Testa att läsa in text från en textfil(p4). Kolla med printdebugging eller stepthrough debugging
+
 
 ### Kata
 1. Skapa ett test med en `Schedule` klass som har
